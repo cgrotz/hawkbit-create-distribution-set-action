@@ -17,6 +17,15 @@ inputs:
   software-module-ids:
     description: 'Comma separated list of IDS of the software modules to associated with this Distribution Set'
     required: false
+  distribution-set-type:
+    description: 'If a distribution set should be created, please provide the type of the distribution set'
+    required: false
+  distribution-set-name:
+    description: 'If a distribution set should be created, please provide the name of the distribution set'
+    required: false
+  distribution-set-version:
+    description: 'If a distribution set should be created, please provide the version of the distribution set'
+    required: false
 outputs:
   distribution-set-id: # id of output
     description: 'ID of the new distribution set created in Hawkbit'

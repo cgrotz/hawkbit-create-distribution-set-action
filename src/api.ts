@@ -74,17 +74,22 @@ export interface DistributionSet {
 
 export async function createDistributionSet(
   distributionSet: DistributionSetRequest
-): Promise<DistributionSet | null> {
+): Promise<DistributionSet[] | null> {
   const hawkbitHostUrl = core.getInput('hawkbit-host-url')
 
   const url = `https://${hawkbitHostUrl}/rest/v1/distributionsets`
 
   core.info(`Creating Distribution Set with name ${distributionSet.name}`)
-  const response = await Axios.post(url, [distributionSet], {
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: getBasicAuthHeader()
-    }
-  })
-  return response.data
+  try {
+    const response = await Axios.post(url, [distributionSet], {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: getBasicAuthHeader()
+      }
+    })
+    return response.data
+  } catch (error) {
+    core.error(`Failed creating distribution set ${error}`)
+    return null
+  }
 }

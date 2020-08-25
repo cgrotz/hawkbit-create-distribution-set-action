@@ -21,8 +21,12 @@ async function run(): Promise<void> {
       requiredMigrationStep: false,
       modules
     })
-    core.info(`Created distribution set ${name}:${version}`)
-    core.setOutput('distribution-set-id', distributionSet!.id.toString())
+    if (distributionSet == null) {
+      core.error(`Failed creating distribution set ${name}:${version}`)
+    } else {
+      core.info(`Created distribution set ${name}:${version}`)
+      core.setOutput('distribution-set-id', distributionSet[0].id.toString())
+    }
   } catch (error) {
     core.setFailed(error.message)
   }

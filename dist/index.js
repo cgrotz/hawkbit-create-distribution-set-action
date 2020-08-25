@@ -532,8 +532,13 @@ function run() {
                 requiredMigrationStep: false,
                 modules
             });
-            core.info(`Created distribution set ${name}:${version}`);
-            core.setOutput('distribution-set-id', distributionSet.id.toString());
+            if (distributionSet == null) {
+                core.error(`Failed creating distribution set ${name}:${version}`);
+            }
+            else {
+                core.info(`Created distribution set ${name}:${version}`);
+                core.setOutput('distribution-set-id', distributionSet[0].id.toString());
+            }
         }
         catch (error) {
             core.setFailed(error.message);
@@ -4282,13 +4287,19 @@ function createDistributionSet(distributionSet) {
         const hawkbitHostUrl = core.getInput('hawkbit-host-url');
         const url = `https://${hawkbitHostUrl}/rest/v1/distributionsets`;
         core.info(`Creating Distribution Set with name ${distributionSet.name}`);
-        const response = yield axios_1.default.post(url, [distributionSet], {
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: getBasicAuthHeader()
-            }
-        });
-        return response.data;
+        try {
+            const response = yield axios_1.default.post(url, [distributionSet], {
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: getBasicAuthHeader()
+                }
+            });
+            return response.data;
+        }
+        catch (error) {
+            core.error(`Failed creating distribution set ${error}`);
+            return null;
+        }
     });
 }
 exports.createDistributionSet = createDistributionSet;
