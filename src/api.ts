@@ -89,7 +89,9 @@ export async function createDistributionSet(
     })
     return response.data
   } catch (error) {
-    core.error(`Failed creating distribution set ${error}`)
+    core.error(
+      `Failed creating distribution set ${error} ${error.response.data}`
+    )
     return null
   }
 }
