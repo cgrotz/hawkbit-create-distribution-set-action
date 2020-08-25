@@ -1,0 +1,25 @@
+name: 'Eclipse Hawkbit Create Distribution Set Action'
+description: 'Create distribution sets '
+inputs:
+  hawkbit-host-url: 
+    description: 'Base URL of the Hawkbit instance to use'
+    required: true
+    default: 'https://api.eu1.bosch-iot-rollouts.com'
+  hawkbit-tenant: 
+    description: 'Tenant of the Hawkbit Instance'
+    required: true
+  hawkbit-username: 
+    description: 'Username of the Hawkbit Instance'
+    required: true
+  hawkbit-password: 
+    description: 'Password of the Hawkbit Instance'
+    required: true
+  software-module-ids:
+    description: 'Comma separated list of IDS of the software modules to associated with this Distribution Set'
+    required: false
+outputs:
+  distribution-set-id: # id of output
+    description: 'ID of the new distribution set created in Hawkbit'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
