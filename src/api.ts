@@ -77,7 +77,7 @@ export async function createDistributionSet(
 ): Promise<DistributionSet[] | null> {
   const hawkbitHostUrl = core.getInput('hawkbit-host-url')
 
-  const url = `https://${hawkbitHostUrl}/rest/v1/distributionsets`
+  const url = `${hawkbitHostUrl}/rest/v1/distributionsets`
 
   core.info(`Creating Distribution Set with name ${distributionSet.name}`)
   try {

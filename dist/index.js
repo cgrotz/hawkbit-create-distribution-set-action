@@ -4285,7 +4285,7 @@ function getBasicAuthHeader() {
 function createDistributionSet(distributionSet) {
     return __awaiter(this, void 0, void 0, function* () {
         const hawkbitHostUrl = core.getInput('hawkbit-host-url');
-        const url = `https://${hawkbitHostUrl}/rest/v1/distributionsets`;
+        const url = `${hawkbitHostUrl}/rest/v1/distributionsets`;
         core.info(`Creating Distribution Set with name ${distributionSet.name}`);
         try {
             const response = yield axios_1.default.post(url, [distributionSet], {
