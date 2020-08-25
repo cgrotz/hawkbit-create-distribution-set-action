@@ -4297,7 +4297,7 @@ function createDistributionSet(distributionSet) {
             return response.data;
         }
         catch (error) {
-            core.error(`Failed creating distribution set ${error} ${error.response.data}`);
+            core.error(`Failed creating distribution set ${error} ${JSON.stringify(error.response.data)}`);
             return null;
         }
     });
